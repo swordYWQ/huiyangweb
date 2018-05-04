@@ -84,7 +84,7 @@ export default {
     // 循环播放
     loop: {
       type: Boolean,
-      default: true
+      default: false
     },
     // 鼠标滚轮
     mousewheel: {
@@ -119,11 +119,21 @@ export default {
   },
   data() {
     return {
+      swiperOption: {},
       swiper: null
     }
   },
-  computed: {
-    swiperOption() {
+  beforeCreated() {
+    this.swiperOption = this.getSwiperOption()
+  },
+  mounted() {
+    this.swiper = this.mySwiper
+  },
+  beforeDestory() {
+    this.swiper = null
+  },
+  methods: {
+    getSwiperOption() {
       let config = {}
 
       // 分页指示器配置
@@ -159,7 +169,7 @@ export default {
       if (autoplay) {
         config.autoplay = {
           delay: Number(autodelay),
-          disableOnInteraction: true,
+          disableOnInteraction: false,
           waitForTransition: waitForTransition
         }
       }
@@ -192,9 +202,6 @@ export default {
       let { option } = this
       return Object.assign(config, option)
     }
-  },
-  mounted() {
-    this.swiper = this.mySwiper
   }
 }
 </script>

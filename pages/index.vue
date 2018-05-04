@@ -1,37 +1,63 @@
 <template>
-  <BaseContainer>
-  <div class="main-view">
-    <div class="company-desc">
-      <!-- <span style="font-size:14px;line-height:31px;">　　晖阳胶粘制品有<img border="0" src="~/assets/images/introduction1.jpg" align="right">限公司（原晖阳胶粘带厂）成立于1992年，经过十余年的发展，企业已发展成为集压敏胶、涂布、分切、研发为一体的胶粘带专业生产厂家。现在厂房面积21000平方米，引进国内外先进的胶粘制品生产设备80多台（套），配备专业的实验室和检验设备，拥有一批高素质的管理和技术人才队伍。公司主要生产经营聚烯亚胺胶带、PET高温胶带、玛拉胶带、电工胶带、美纹胶带胶带、双面胶带、保护膜、彩色胶带、封箱胶带、PE、PO袋等<span style="font-size:x-small;">，是</span>国内胶粘带行业中较大规模的企业，也是目前国内较大的压敏胶粘带制造商之一。公司现已实现“管理现代化、经营国际化”。<br>
-　　一直以来，本公司始终秉承“品质第一，精益求精，诚信经营，价格合理，服务至上，为客保密”的宗旨，一一贯之，励精图治。从而赢得了广大厂家的信任和赞誉，我们将一如继往，不断更新，将一流的服务于广大厂家，并诚挚的欢迎广大客户与我们建立长久友好合作，同时也感谢各公司对我公司一直以来的支持，有您往日的支持，才有我们今天的辉煌，也欢迎各厂来电订制，参观指导，谢谢！<br>
-</span> -->
-      <p>
-        晖阳胶粘制品有限公司（原晖阳胶粘带厂）成立于1992年，
-        <img src="~/assets/images/introduction1.jpg" alt="" align="right">
-        经过十余年的发展，企业已发展成为集压敏胶、涂布、分切、研发为一体的胶粘带专业生产厂家。现在厂房面积21000平方米，引进国内外先进的胶粘制品生产设备80多台（套），配备专业的实验室和检验设备，拥有一批高素质的管理和技术人才队伍。公司主要生产经营聚烯亚胺胶带、PET高温胶带、玛拉胶带、电工胶带、美纹胶带胶带、双面胶带、保护膜、彩色胶带、封箱胶带、PE、PO袋等，是国内胶粘带行业中较大规模的企业，也是目前国内较大的压敏胶粘带制造商之一。公司现已实现“管理现代化、经营国际化”。
-      </p>
-      <p>
-        一直以来，本公司始终秉承“品质第一，精益求精，诚信经营，价格合理，服务至上，为客保密”的宗旨，一一贯之，励精图治。从而赢得了广大厂家的信任和赞誉，我们将一如继往，不断更新，将一流的服务于广大厂家，并诚挚的欢迎广大客户与我们建立长久友好合作，同时也感谢各公司对我公司一直以来的支持，有您往日的支持，才有我们今天的辉煌，也欢迎各厂来电订制，参观指导，谢谢！<br/>
-        <img src="~/assets/images/introduction2.jpg" alt="" align="center">
-      </p>
+  <!-- <BaseContainer> -->
+ 
+  <!-- </BaseContainer> -->
+  <div>
+
+    <header class="header">
+      <!-- <img src="~assets/images/header.jpg" alt="http://dghuiyang.com.cn/"> -->
+    </header>
+
+    <div class="nav">
+      <NavBar :nav="nav"></NavBar>
     </div>
-    <div class="swiper-products">
-      <Swiper :option="swiperOption" :showpagination="false" autoplay autodelay="1000" mousewheel waitForTransition>
-         <div class="swiper-slide" v-for="(item,index) in list" :key="index">
-           <a  class="product-link" href="">
-            <img :src="item" alt="" width="240" height="180" border="1">
-            </a>
-          <!-- <div :style="{width: '100%', height: '100%', background: `url(${item}) top center no-repeat`}"></div> -->
+
+    <div class="swipe-pic">
+      <!-- <Swiper :option="swiperOption" mousewheel>
+        <div class="swiper-slide" v-for="(item,index) in bannerlist" :key="index">
+          <div :style="{background: `url(${item}) top center no-repeat`,width:'100%',height:'100%'}"></div>
         </div>
-      </Swiper>
+      </Swiper> -->
+      <div class="swiper-container" style="height:400px;" v-swiper:mySwiper="swiperOption">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="(item,index) in bannerlist" :key="index">
+        <!-- <div :style="{background: `url(${item}) top center no-repeat`,width:'100%',height:'100%'}"></div> -->
+        <div :data-background="item" class="swiper-lazy" style="width:100%;height:100%;">
+            <div class="swiper-lazy-preloader"></div>
+        </div>
+      </div>
     </div>
+     <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+
+      <!-- 如果需要导航按钮 -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+  </div>
     </div>
-  </BaseContainer>
+
+    <div class="wrapper">
+      <main id="main" class="main-content">
+        <SideBarLeft></SideBarLeft>
+        <!-- <slot></slot> -->
+        <transition name="page">
+          <nuxt-child></nuxt-child>
+        </transition>
+      </main>
+    </div>
+
+    <Copyright></Copyright>
+  </div>
 </template>
 <script>
 // import axios from '~/plugins/axios'
-import BaseContainer from '~/components/base-container.vue'
-import Swiper from '~/components/swiper'
+// import BaseContainer from '~/components/base-container.vue'
+import NavBar from '~/components/nav-bar.vue'
+import SideBarLeft from '~/components/sidebar-left.vue'
+import Copyright from '~/components/copyright.vue'
+
+// import Swiper from '~/components/swiper'
+// import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   // async asyncData() {
   //   let { data } = await axios.get('/api/users')
@@ -42,23 +68,101 @@ export default {
   //   return { category: data }
   // },
   components: {
-    BaseContainer,
-    Swiper
+    // BaseContainer,
+    NavBar,
+    SideBarLeft,
+    Copyright
+    // Swiper,
+    // swiper,
+    // swiperSlide
+  },
+  asyncData() {
+    return {
+      nav: {
+        list: [
+          {
+            id: 1,
+            name: '公司简介',
+            url: '/'
+          },
+          {
+            id: 2,
+            name: '产品简介',
+            url: '/product'
+          },
+          {
+            id: 3,
+            name: '美纹纸胶带',
+            url: '/product/1'
+          },
+          {
+            id: 4,
+            name: 'BOPP胶带',
+            url: '/product/2'
+          },
+          {
+            id: 5,
+            name: '高温胶带',
+            url: '/product/3'
+          },
+          {
+            id: 6,
+            name: '电子部品胶带',
+            url: '/product/4'
+          },
+          {
+            id: 7,
+            name: '荣誉证书',
+            url: '/credentials'
+          },
+          {
+            id: 8,
+            name: '工厂设备',
+            url: '/device'
+          },
+          {
+            id: 9,
+            name: '留言反馈',
+            url: '/comments'
+          },
+          {
+            id: 10,
+            name: '联系我们',
+            url: '/contact'
+          }
+        ]
+      },
+      banner: {
+        list: []
+      },
+      product: {
+        list: []
+      }
+    }
   },
   data() {
     return {
-      list: [
-        require('~/assets/images/product1.png'),
-        require('~/assets/images/product2.png'),
-        require('~/assets/images/product3.png'),
-        require('~/assets/images/product4.png'),
-        require('~/assets/images/product5.png')
+      bannerlist: [
+        // '/assets/images/mswiper1.jpg',
+        // '/assets/images/mswiper2.jpg'
+        require('~/assets/images/mswiper1.jpg'),
+        require('~/assets/images/mswiper2.jpg')
       ],
       swiperOption: {
-        speed: 2000,
-        slidesPerView: 3,
-        spaceBetween: 30,
-        centeredSlides: true
+        lazy: true,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false
+        },
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       }
     }
   },
@@ -72,24 +176,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-view {
-  width: 680px;
-  margin-left:36px;
-  .company-desc {
-    p {
-      text-indent: 30px;
-      line-height: 31px;
-      font-size: 14px;
-    }
-  }
 
-  // .swiper-product {
-  //   width: 100%;
-  //   height: 185px;
-  //   .product-link{
-  //     display: block;
-  //     border: 1px solid #aaa;
-  //   }
-  // }
-}
 </style>

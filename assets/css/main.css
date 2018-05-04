@@ -35,3 +35,11 @@ a, a:hover, a:focus, a:visited
   max-width: 400px;
   max-height: 289px;
 } */
+
+.page-enter-active, .page-leave-active {
+  transition: all .5s;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
+  transform: translate(50px);
+}

@@ -1,9 +1,10 @@
 <template>
-  <ul class="nav-list">
-        <li class="nav-item">
-          <a href="">公司简介</a>
+  <ul class="nav-list" v-if="nav">
+        <li class="nav-item" v-for="(item,index) in nav.list" :key="index">
+          <!-- <a href="">{{item.name}}</a> -->
+          <nuxt-link :to="item.url">{{item.name}}</nuxt-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="">产品简介</a>
         </li>
         <li class="nav-item">
@@ -29,6 +30,17 @@
         </li>
         <li class="nav-item">
           <a href="">联系我们</a>
-        </li>
+        </li> -->
       </ul>
 </template>
+<script>
+export default {
+  name: 'nav-bar',
+  props: {
+    nav: {
+      type: Object,
+      default: null
+    }
+  }
+}
+</script>

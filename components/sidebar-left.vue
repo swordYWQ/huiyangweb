@@ -45,7 +45,7 @@
       .item-link {
         color: #fff;
         display: block;
-        padding-left: 65px;
+        padding-left: 45px;
         text-align: center;
         text-decoration: none;
       }

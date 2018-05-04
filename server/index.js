@@ -32,6 +32,9 @@ app.set('port', port)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Import API Routes
+// app.get('/', (req, res) => {
+//   res.redirect('/home')
+// })
 app.use('/api', api)
 
 // Import and Set Nuxt.js options
